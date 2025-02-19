@@ -16,15 +16,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(UserId: any, password: string): Observable<boolean> {
-    const params = { UID: UserId, PWD: password };
-
+    const userIdInt = parseInt(UserId, 10); 
+    const params = { UID: userIdInt, PWD: password };
+  
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map((response) => {
         if (response?.UserPassword) {
           const decryptedPassword = this.decrypt(response.UserPassword, this.encryptionKey);
           const resuserid = response.UserId;
     const params = { UID: UserId, PWD: password };
-    if (decryptedPassword === password) {
+    if (resuserid === UserId && decryptedPassword === password) {
             console.log('Login successful');
             localStorage.setItem("FullName", response.FullName);
             localStorage.setItem("ContactMobile", response.ContactMobile);
@@ -34,7 +35,7 @@ export class AuthService {
             return true;
           } else {
             return false;
-        }
+          }
         } else {
           console.log('Invalid response from server');
         }
@@ -42,10 +43,11 @@ export class AuthService {
       }),
       catchError((error) => {
         console.error('Error during login:', error);
-        return of(false);  // Return false in case of an error
+        return of(false); // Return false in case of an error
       })
     );
-}
+  }
+  
 
 
   private decrypt(encryptedText: string, key: string): string {
