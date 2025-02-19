@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
         document.body.classList.remove('loading');
       }
     });
-    console.log("project loaded");
+    
   
     this.apiService.GetCityTitle().subscribe(
       (res) => {
