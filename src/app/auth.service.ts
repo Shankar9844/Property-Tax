@@ -24,7 +24,7 @@ export class AuthService {
           const decryptedPassword = this.decrypt(response.UserPassword, this.encryptionKey);
           const resuserid = response.UserId;
     const params = { UID: UserId, PWD: password };
-    if (resuserid === UserId && decryptedPassword === password) {
+    if (decryptedPassword === password) {
             console.log('Login successful');
             localStorage.setItem("FullName", response.FullName);
             localStorage.setItem("ContactMobile", response.ContactMobile);
