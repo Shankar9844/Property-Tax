@@ -1,0 +1,40 @@
+<div class="form-container">
+  <form [formGroup]="profileForm">
+    
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        <input type="text" id="firstName" class="form-control" formControlName="firstName" placeholder="Enter your first name" readonly>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="UserId" class="form-label">UserId</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-person-plus"></i></span>
+        <input type="text" id="UserId" class="form-control" formControlName="UserId" placeholder="Enter your UserId" readonly>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+        <input type="text" id="phone" class="form-control" formControlName="phone" placeholder="Enter your phone number" readonly>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+        <input type="text" id="password" class="form-control" formControlName="password" placeholder="Enter your password" readonly>
+      </div>
+    </div>
+
+    <!-- <button type="button" class="btn btn-primary w-100" disabled>
+      Submit
+    </button> -->
+  </form>
+</div>

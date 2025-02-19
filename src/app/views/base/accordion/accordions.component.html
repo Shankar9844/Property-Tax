@@ -1,0 +1,413 @@
+
+
+<div class="container" *ngIf="displayheadcard">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span><strong>Owner Name:</strong> {{ ownerNamedisplay }}</span>
+      <span><strong>PID:</strong> {{ displaypid }}</span>
+    </div>
+  </div>
+</div>
+
+
+  <div class="custom-container mt-4" *ngIf="Pidshows">
+    <div class="custom-card shadow-sm p-4">
+      <h4 class="text-center mb-3">Enter PID</h4>
+      <form [formGroup]="pidForm" (ngSubmit)="onPidSubmit()">
+        <div class="mb-3">
+          <label for="pid" class="form-label">PID</label>
+          <input id="pid" type="text" class="form-control" 
+                 [class.is-invalid]="pidForm.controls['pid'].invalid && pidForm.controls['pid'].touched"
+                 formControlName="pid" />
+          <div class="invalid-feedback" *ngIf="pidForm.controls['pid'].hasError('required')">
+            PID is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="pidForm.controls['pid'].hasError('pattern')">
+            PID must be a number.
+          </div>
+        </div>
+  
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary" [disabled]="pidForm.invalid">Submit</button>
+          <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+        </div>
+       
+      </form>
+      
+    </div>
+   
+  </div>
+
+
+
+ <div class="container mt-4" *ngIf="isPidSubmitted">
+  <!----Show Property Form only after PID is submitted--->
+
+  <div class="card shadow p-4">
+
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <button class="bi bi-arrow-left-square-fill btn btn-secondary" cTooltip="back to PID" (click)="backtopid()"></button>
+      <h3 class="flex-grow-1 text-center mb-0"><strong>PROPERTY DETAILS</strong></h3>
+    </div>
+
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Owner Name (Eng.)</label>
+          <input type="text" class="form-control" formControlName="ownerNameEng" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Owner Name (Kannada)</label>
+          <input type="text" class="form-control" formControlName="ownerNameKannada" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">PID</label>
+          <input type="number" class="form-control" formControlName="pid" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Ward No.</label>
+          <input type="number" class="form-control" formControlName="wardNo" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Property No.</label>
+          <input type="number" class="form-control" formControlName="propertyNo" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Occupier Name</label>
+          <input type="text" class="form-control" formControlName="occupierName" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Mobile No.</label>
+          <input type="number" class="form-control" formControlName="mobileNo" />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea type="text" class="form-control" rows="2" formControlName="address"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Property Type</label>
+          <input type="text" class="form-control" formControlName="propertyType" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Physical Property</label>
+          <input type="text" class="form-control" formControlName="physicalProperty" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Property Usage</label>
+          <input type="text" class="form-control" formControlName="propertyUsage" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Total Site Area</label>
+          <input type="number" class="form-control" formControlName="totalSiteArea" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Total Built Up</label>
+          <input type="number" class="form-control" formControlName="totalBuiltUp" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-label">RR No.</label>
+          <input type="number" class="form-control" formControlName="rrNo" />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Page No.</label>
+        <input type="number" class="form-control" formControlName="pageNo" />
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Update Mobile No.</label>
+          <div class="d-flex">
+            <input type="number" class="form-control" formControlName="updateMobileNo" />
+            <button type="button" class="bi bi-pen fs-4 btn btn-sm btn-warning ms-2" (click)="toggleEdit('mobile')"></button>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Update Aadhar No.</label>
+          <div class="d-flex">
+            <input type="number" class="form-control" formControlName="updateAadharNo" />
+            <button type="button" class="bi bi-pen fs-4 btn btn-sm btn-warning ms-2" (click)="toggleEdit('aadhar')"></button>
+          </div>
+        </div>
+
+      </div> 
+
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary" [disabled]="propertyForm.invalid">Update</button>
+
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <!----this is for tax details-->
+  <div class="card mt-4" >
+    <div class="card-header">
+      <h5 class="card-title" style="text-align: center;"><h3><strong>TAX PAYMENT DETAILS</strong></h3></h5>
+    </div>
+    <div class="card-body">
+      <div class="accordion" id="taxAccordion">
+        <div class="accordion-item" *ngFor="let record of taxRecords; let i = index">
+          <h2 class="accordion-header" id="heading{{i}}">
+            <button 
+              class="accordion-button" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              [attr.data-bs-target]="'#collapse' + i"
+              [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
+              [attr.aria-controls]="'collapse' + i">
+              Assessment Year: {{ record.AssessmentYear }}
+            </button>
+          </h2>
+          
+          <div [id]="'collapse' + i" class="accordion-collapse collapse" [class.show]="i === 0" data-bs-parent="#taxAccordion">
+            <div class="accordion-body">
+              <p><strong>Tax Status:</strong> {{ record.Status }}</p>
+              <p><strong>Amount to be Paid:</strong> ₹{{ record.AmountPaid }}</p>
+              
+              <!-- Checkbox to Select for Payment -->
+              <div class="form-check">
+                <input 
+                  type="checkbox" 
+                  class="form-check-input" 
+                  [id]="'checkbox' + i" 
+                  [disabled]="record.Status === 'Paid'"
+                  [(ngModel)]="record.isSelected"
+                  (ngModelChange)="updateTotalAmount()">
+                <label class="form-check-label" [for]="'checkbox' + i">
+                  Select for Payment
+                </label>
+              </div>
+
+              <div class="right-div">
+               
+                <button 
+                class="btn btn-warning bi bi-view-list me-2"
+                (click)="SendOwnerviewdetails(record)"
+                [ngClass]="{'blurred': record.Status === 'Paid'}"
+                [style.pointer-events]="record.Status === 'Paid' ? 'none' : 'auto'">
+                View Details
+              </button>
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Total Amount -->
+      <div class="mt-3 text-center">
+        <h3>Total Amount to be Paid: ₹{{ totalAmount }}</h3>
+        <button type="button" class="btn btn-primary" onclick="">Pay Now ₹{{ totalAmount }}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+ <!-------owner information form-->
+<div class="contailer">
+
+  <div class="card mt-4" *ngIf="draftviewdetails">
+    
+    <div class="card-header d-flex align-items-center justify-content-between">
+      
+      <button class="bi bi-arrow-left-square-fill btn btn-secondary" cTooltip="Back to Property Details" (click)="backtostep()"></button>
+      <h3 class="flex-grow-1 text-center mb-0"><STrong>Owner Information</STrong></h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="ownerForm" (ngSubmit)="DraftTaxviewDetails()">
+        
+        <div class="row">
+          
+          <div>
+            <strong class="text-danger">Note:</strong><i>The tax details provided are calculated as of today and may vary at the time of payment.</i>
+          </div>
+         
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="propertyNo">OwnerName</label>
+                <input type="text" class="form-control" id="propertyNo" formControlName="Ownername" />
+                <div *ngIf="ownerForm.get('Ownername')?.invalid && ownerForm.get('Ownername')?.touched" class="text-danger">
+                  Ownername is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <label for="assessmentYear">PropertyType</label>
+                <input type="text" class="form-control" id="PropTypeName" formControlName="PropTypeName" />
+                <div *ngIf="ownerForm.get('PropTypeName')?.invalid && ownerForm.get('PropTypeName')?.touched" class="text-danger">
+                  PropertyType Year is required
+                </div>
+              </div>
+            </div>
+           
+          </div>
+  
+        </div>
+         
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="text-primary mt-4 text-center">Tax Details in(Rs..)</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="tax">Tax</label>
+              <input type="number" class="form-control" id="tax" formControlName="tax" />
+              <div *ngIf="ownerForm.get('tax')?.invalid && ownerForm.get('tax')?.touched" class="text-danger">
+                Tax is required and must be a positive number
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cess">Cess</label>
+              <input type="number" class="form-control" id="cess" formControlName="cess" />
+              <div *ngIf="ownerForm.get('cess')?.invalid && ownerForm.get('cess')?.touched" class="text-danger">
+                Cess is required and must be a positive number
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="penalty">Penalty</label>
+              <input type="number" class="form-control" id="penalty" formControlName="penalty" />
+              <div *ngIf="ownerForm.get('penalty')?.invalid && ownerForm.get('penalty')?.touched" class="text-danger">
+                Penalty is required and must be a positive number
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="swmCess">SWM Cess</label>
+              <input type="number" class="form-control" id="swmCess" formControlName="swmCess" />
+              <div *ngIf="ownerForm.get('swmCess')?.invalid && ownerForm.get('swmCess')?.touched" class="text-danger">
+                SWM Cess is required and must be a positive number
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="vehicleCess">Vehicle Cess</label>
+              <input type="number" class="form-control" id="vehicleCess" formControlName="vehicleCess" />
+              <div *ngIf="ownerForm.get('vehicleCess')?.invalid && ownerForm.get('vehicleCess')?.touched" class="text-danger">
+                Vehicle Cess is required and must be a positive number
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ugdCharges">UGD Charges</label>
+              <input type="number" class="form-control" id="ugdCharges" formControlName="ugdCharges" />
+              <div *ngIf="ownerForm.get('ugdCharges')?.invalid && ownerForm.get('ugdCharges')?.touched" class="text-danger">
+                UGD Charges is required and must be a positive number
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="swmCharges">SWM Charges</label>
+              <input type="number" class="form-control" id="swmCharges" formControlName="swmCharges" />
+              <div *ngIf="ownerForm.get('swmCharges')?.invalid && ownerForm.get('swmCharges')?.touched" class="text-danger">
+                SWM Charges is required and must be a positive number
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 ">
+            <div class="form-group">
+              <label for="assessmentYear">Assessment Year</label>
+              <input type="text" class="form-control" id="assessmentYear" formControlName="assessmentYear" />
+              <div *ngIf="ownerForm.get('assessmentYear')?.invalid && ownerForm.get('assessmentYear')?.touched" class="text-danger">
+                Assessment Year is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="totalamount"><strong>Total Amount</strong></label>
+              <input type="number" class="form-control" id="totalamount" formControlName="totalamount" />
+              <div *ngIf="ownerForm.get('totalamount')?.invalid && ownerForm.get('totalamount')?.touched" class="text-danger">
+                totalamount is required 
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="agreeTerms" formControlName="agreeTerms" />
+              <label class="form-check-label" for="agreeTerms">
+                <i>I hereby agree for the terms and conditions and I declare that the particulars furnished in this form have been duly filled up by me and the details furnished are true and correct to the best of my knowledge. I understand that for false declarations there will be penal actions.</i>
+              </label>
+              <div *ngIf="ownerForm.get('agreeTerms')?.invalid && ownerForm.get('agreeTerms')?.touched" class="text-danger">
+                You must agree to the terms and conditions
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary mt-4" (click)="GeneratePdf()" [disabled]="ownerForm.invalid">
+              <i class="bi bi-printer"></i> Print
+          </button>
+          <button type="submit" class="btn btn-success mt-4">
+              <i class="bi bi-credit-card"></i> Pay
+          </button>
+      </div>
+       
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

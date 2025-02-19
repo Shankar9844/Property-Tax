@@ -1,0 +1,47 @@
+:host ::ng-deep .accordion-custom {
+  .accordion-button {
+    background-color: var(--cui-dark);
+    color: var(--cui-white);
+  }
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f7f8; 
+}
+
+.custom-container {
+ 
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.custom-card {
+  border-radius: 10px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.right-div
+{
+  float: right;
+  margin-top: -30px;
+}
+
+
+.blurred {
+  filter: blur(1px);
+  color: #464545;  /* Optional: Change color to grey when blurred */
+  cursor: not-allowed;  /* Change cursor to indicate that it's not clickable */
+}
+
+

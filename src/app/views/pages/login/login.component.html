@@ -1,0 +1,58 @@
+<div class="bg-light min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+  <div class="text-center mb-4">
+    <h2 class="display-6 text-primary">
+      <strong>{{ TitleEnglish || 'Welcome to the Property Tax Portal' }}</strong>
+    </h2>
+    <p class="lead">
+      Powered by {{ SMSSende || 'Your Trusted Partner' }} - Version: {{ Version || '1.0' }}
+    </p>
+  </div>
+
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col xs="12" md="6" class="mb-3">
+        <c-card class="p-4 shadow-lg border-0">
+          <c-card-body>
+            <h3 class="mb-4 text-center text-secondary">Login to Your Account</h3>
+            <form [formGroup]="logform" (ngSubmit)="onLogSubmit()">
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <i class="bi bi-person-fill"></i>
+                </span>
+                <input class="form-control" formControlName="UserId" autoComplete="UserId" placeholder="User ID" />
+              </c-input-group>
+              <div *ngIf="logform.get('UserId')?.invalid && logform.get('UserId')?.touched" class="text-danger">
+                User ID is required.
+              </div>
+
+              <c-input-group class="mb-4">
+                <span cInputGroupText>
+                  <i class="bi bi-lock-fill"></i>
+                </span>
+                <input class="form-control" formControlName="password" autoComplete="current-password" placeholder="Password" type="password" />
+              </c-input-group>
+
+              <div *ngIf="logform.get('password')?.invalid && logform.get('password')?.touched" class="text-danger">
+                Password must be at least 4 characters.
+              </div>
+
+              <div *ngIf="errorMessage" class="text-danger mb-3">
+                {{ errorMessage }}
+              </div>
+
+              <c-row>
+                <c-col xs="12" class="text-center">
+                  <button cButton class="px-4 w-100" color="primary" type="submit" [disabled]="logform.invalid">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> Login
+                  </button>
+                </c-col>
+              </c-row>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+
+     
+    </c-row>
+  </c-container>
+</div>
