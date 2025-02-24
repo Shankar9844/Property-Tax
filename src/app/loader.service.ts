@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoaderService {
   isLoading = new BehaviorSubject<boolean>(false);
-  private delayDuration = 1000;  // Minimum delay of 2 seconds
+  private delayDuration = 1500;  
   private timeoutId: any = null;
 
   show() {
@@ -25,4 +25,5 @@ export class LoaderService {
       this.timeoutId = null;
     }, this.delayDuration);
   }
+
 }

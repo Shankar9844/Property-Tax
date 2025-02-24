@@ -31,17 +31,19 @@ html, body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.right-div
-{
-  float: right;
-  margin-top: -30px;
+.viewbutton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-
+/* Disable button styles for "Paid" status */
 .blurred {
   filter: blur(1px);
-  color: #464545;  /* Optional: Change color to grey when blurred */
-  cursor: not-allowed;  /* Change cursor to indicate that it's not clickable */
+  color: #464545;
+  cursor: not-allowed;
 }
 
 

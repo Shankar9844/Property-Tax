@@ -165,9 +165,9 @@
   </div>
   <br>
   <!----this is for tax details-->
-  <div class="card mt-4" >
-    <div class="card-header">
-      <h5 class="card-title" style="text-align: center;"><h3><strong>TAX PAYMENT DETAILS</strong></h3></h5>
+  <div class="card mt-4">
+    <div class="card-header text-center">
+      <h3><strong>TAX PAYMENT DETAILS</strong></h3>
     </div>
     <div class="card-body">
       <div class="accordion" id="taxAccordion">
@@ -188,7 +188,7 @@
             <div class="accordion-body">
               <p><strong>Tax Status:</strong> {{ record.Status }}</p>
               <p><strong>Amount to be Paid:</strong> ₹{{ record.AmountPaid }}</p>
-              
+  
               <!-- Checkbox to Select for Payment -->
               <div class="form-check">
                 <input 
@@ -202,32 +202,32 @@
                   Select for Payment
                 </label>
               </div>
-
-              <div class="right-div">
-               
+  
+              <!-- Button Container -->
+              <div class="mt-4">
                 <button 
-                class="btn btn-warning bi bi-view-list me-2"
-                (click)="SendOwnerviewdetails(record)"
-                [ngClass]="{'blurred': record.Status === 'Paid'}"
-                [style.pointer-events]="record.Status === 'Paid' ? 'none' : 'auto'">
-                View Details
-              </button>
+                  class="btn btn-warning bi bi-view-list me-2 "
+                  (click)="SendOwnerviewdetails(record)"
+                  [ngClass]="{'blurred': record.Status === 'Paid'}"
+                  [style.pointer-events]="record.Status === 'Paid' ? 'none' : 'auto'">
+                  View Details
+                </button>
               </div>
-              
-              
+  
             </div>
           </div>
+
         </div>
       </div>
-      
+  
       <!-- Total Amount -->
       <div class="mt-3 text-center">
         <h3>Total Amount to be Paid: ₹{{ totalAmount }}</h3>
-        <button type="button" class="btn btn-primary" onclick="">Pay Now ₹{{ totalAmount }}</button>
+        <button type="button" class="btn btn-primary">Pay Now ₹{{ totalAmount }}</button>
       </div>
-
     </div>
   </div>
+  
 </div>
  <!-------owner information form-->
 <div class="contailer">

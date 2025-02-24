@@ -34,7 +34,7 @@ const routes: Routes = [
       {
         path: 'DemandNotice',
         loadChildren: () =>
-          import('./views/base/base.module').then((m) => m.BaseModule),canActivate:[AuthGuard]
+          import('./views/base/base.module').then((m) => m.BaseModule),canActivate:[AuthGuard],
         
       },
       {

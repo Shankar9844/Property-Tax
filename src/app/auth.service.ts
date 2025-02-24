@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class AuthService {
   private readonly apiUrl = 'https://demo.seminalsoftwarepvt.in/eoasis17/api/kiosk/Authenticate_User';
   private readonly encryptionKey = 'OasisWeb';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService,) { }
 
   login(UserId: any, password: string): Observable<boolean> {
     const userIdInt = parseInt(UserId, 10); 
@@ -24,9 +25,11 @@ export class AuthService {
         if (response?.UserPassword) {
           const decryptedPassword = this.decrypt(response.UserPassword, this.encryptionKey);
           const resuserid = response.UserId;
-    const params = { UID: UserId, PWD: password };
-    if (resuserid === UserId && decryptedPassword === password) {
+          const superuser = response.SuperUser;
+          const params = { UID: UserId, PWD: password };
+        if (resuserid === userIdInt && decryptedPassword === password && superuser === true) {
             console.log('Login successful');
+            this.toastr.success('Login Successfully', 'Success');
             localStorage.setItem("FullName", response.FullName);
             localStorage.setItem("ContactMobile", response.ContactMobile);
             localStorage.setItem("UserId", response.UserId);
@@ -38,6 +41,7 @@ export class AuthService {
           }
         } else {
           console.log('Invalid response from server');
+
         }
         return false;
       }),
