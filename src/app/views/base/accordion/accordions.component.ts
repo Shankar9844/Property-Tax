@@ -110,7 +110,7 @@ export class AccordionsComponent implements OnInit {
       totalBuiltUp: ['', [Validators.required, Validators.pattern('^[0-9.]*$')]],
       rrNo: ['', Validators.required],
       pageNo: ['', Validators.required],
-
+      
       updateMobileNo: [{ value: '', disabled: true }, [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       updateAadharNo: [{ value: '', disabled: true }, [Validators.required, Validators.pattern('^[0-9]{12}$')]]
     });

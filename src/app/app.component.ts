@@ -5,6 +5,7 @@ import { iconSubset } from './icons/icon-subset';
 import { Title } from '@angular/platform-browser';
 import { ApiService } from './api.service';
 import { LoaderService } from './loader.service';
+import { SharedService } from './shared.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private iconSetService: IconSetService,
     private apiService: ApiService,
-    private loaderService: LoaderService // Inject LoaderService
+    private loaderService: LoaderService,
+    private  sharedDataService:SharedService// Inject LoaderService
   ) {
     this.titleService.setTitle(this.title);
     this.iconSetService.icons = { ...iconSubset };
@@ -48,6 +50,7 @@ export class AppComponent implements OnInit {
           localStorage.setItem('SMSSende', res.SMSSender || '');
           localStorage.setItem('Version', res.Version || '');
           localStorage.setItem('TitleEnglish', res.TitleEnglish || '');
+          this.sharedDataService.updateVersion(res.Version);
         }
       },
       (error) => {
