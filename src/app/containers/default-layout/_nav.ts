@@ -36,7 +36,7 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Demand Notice',
-
+      
         url: '/DemandNotice/PID',
         children: [
           {

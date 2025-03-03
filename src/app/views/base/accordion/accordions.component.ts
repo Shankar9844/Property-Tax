@@ -118,7 +118,7 @@ export class AccordionsComponent implements OnInit {
 
   fetchPropertyData(res: any): void {
 
-
+    
     this.propertyForm.patchValue({
       ownerNameEng: res.OwnerFirstNameEng,
       ownerNameKannada: res.OwnerFName,
