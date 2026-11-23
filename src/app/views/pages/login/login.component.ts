@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.version = version; // Get the version
     });
   }
-
+  //login-module-ts
   onLogSubmit() {
     if (this.logform.valid) {
       const { UserId, password } = this.logform.value;
